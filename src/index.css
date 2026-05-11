@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: #0c1a12; color: #f5f0e8; font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+
+.grain {
+  position: fixed; inset: 0; pointer-events: none; z-index: 999; opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+
+.s-bar { height: 3px; background: rgba(255,255,255,0.07); border-radius: 100px; overflow: hidden; margin-top: 7px; }
+.s-fill { height: 100%; border-radius: 100px; transition: width 1.4s ease; }
+.glass { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 18px; padding: 20px; backdrop-filter: blur(12px); }
+.section-label { font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: #4a7c59; display: block; margin-bottom: 12px; }
+.section-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 42px); color: #f5f0e8; letter-spacing: -1px; line-height: 1.08; margin-bottom: 12px; }
+.section-sub { font-size: 15px; color: rgba(245,240,232,0.5); line-height: 1.75; max-width: 520px; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #f5a623; color: #0c1a12; font-size: 15px; font-weight: 600; padding: 14px 28px; border-radius: 100px; transition: all 0.25s; border: none; cursor: pointer; text-decoration: none; }
+.btn-primary:hover { opacity: 0.88; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,166,35,0.35); }
+.btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: #f5f0e8; font-size: 15px; font-weight: 400; padding: 14px 28px; border-radius: 100px; border: 1px solid rgba(245,240,232,0.2); transition: all 0.25s; cursor: pointer; text-decoration: none; }
+.btn-outline:hover { border-color: rgba(245,240,232,0.55); background: rgba(245,240,232,0.05); }
+.marquee-track { display: flex; gap: 44px; width: max-content; animation: marquee 26s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes pulseDot { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+.pulse-dot { animation: pulseDot 2s infinite; }
