@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { features, testimonials, plans, problems, stats, marqueeItems } from '../data/content'
@@ -162,9 +162,23 @@ export function Testimonials() {
 }
 
 // ── PRICING ───────────────────────────────────────────────────────
-export function Pricing() {
+export function Pricing({ onSelectPlan }) {
   const ref = useRef()
+  const [selectedPlan, setSelectedPlan] = useState(null)
   useReveal(ref)
+  
+  const handleSelectPlan = (planName) => {
+    setSelectedPlan(planName)
+    // Trigger pulse animation
+    gsap.fromTo(`.plan-card-${planName}`,
+      { scale: 1 },
+      { scale: 1.02, duration: 0.2, ease: 'back.out', yoyo: true, repeat: 1 }
+    )
+    setTimeout(() => {
+      if (onSelectPlan) onSelectPlan()
+    }, 600)
+  }
+  
   return (
     <section ref={ref} id="pricing" style={{ padding:'clamp(60px, 10vw, 100px) clamp(16px, 5vw, 48px)', background:'rgba(255,255,255,0.015)', borderTop:'1px solid rgba(255,255,255,0.05)' }}>
       <div style={{ maxWidth:1140, margin:'0 auto' }}>
@@ -173,13 +187,41 @@ export function Pricing() {
         <p className="section-sub reveal" style={{ marginBottom:48 }}>No hidden fees. No lock-in contracts. Cancel anytime.</p>
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(clamp(250px, 100%, 280px),1fr))', gap:'clamp(14px, 2vw, 18px)' }}>
           {plans.map(p => (
-            <div key={p.name} className="reveal" style={{
-              background: p.featured ? 'rgba(245,166,35,0.05)' : 'rgba(255,255,255,0.03)',
-              border: p.featured ? '1px solid rgba(245,166,35,0.45)' : '1px solid rgba(255,255,255,0.08)',
-              borderRadius:22, padding:32, transition:'all 0.3s', cursor:'default',
+            <div key={p.name} className={`reveal pricing-card plan-card-${p.name}`} onClick={() => handleSelectPlan(p.name)} style={{
+              background: selectedPlan === p.name 
+                ? 'rgba(245,166,35,0.12)' 
+                : p.featured 
+                  ? 'rgba(245,166,35,0.05)' 
+                  : 'rgba(255,255,255,0.03)',
+              border: selectedPlan === p.name
+                ? '2px solid rgba(245,166,35,0.8)'
+                : p.featured 
+                  ? '1px solid rgba(245,166,35,0.45)' 
+                  : '1px solid rgba(255,255,255,0.08)',
+              borderRadius:22, padding:32, transition:'all 0.3s', cursor:'pointer',
+              position: 'relative', overflow: 'hidden'
             }}
-              onMouseEnter={e => { e.currentTarget.style.transform='translateY(-4px)'; e.currentTarget.style.boxShadow='0 20px 48px rgba(0,0,0,0.3)' }}
-              onMouseLeave={e => { e.currentTarget.style.transform='none'; e.currentTarget.style.boxShadow='none' }}>
+              onMouseEnter={e => { 
+                if (selectedPlan !== p.name) {
+                  e.currentTarget.style.transform='translateY(-4px)'; 
+                  e.currentTarget.style.boxShadow='0 20px 48px rgba(0,0,0,0.3)'
+                  e.currentTarget.style.borderColor = 'rgba(245,166,35,0.5)'
+                }
+              }}
+              onMouseLeave={e => { 
+                if (selectedPlan !== p.name) {
+                  e.currentTarget.style.transform='none'; 
+                  e.currentTarget.style.boxShadow='none'
+                  e.currentTarget.style.borderColor = p.featured ? 'rgba(245,166,35,0.45)' : 'rgba(255,255,255,0.08)'
+                }
+              }}>
+              {/* Selection checkmark */}
+              {selectedPlan === p.name && (
+                <div style={{ position: 'absolute', top: 12, right: 12, width: 28, height: 28, borderRadius: '50%', background: '#f5a623', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0c1a12', fontWeight: 'bold', fontSize: 16 }}>
+                  ✓
+                </div>
+              )}
+              
               {p.featured && <div style={{ background:'#f5a623', color:'#0c1a12', fontSize:11, fontWeight:600, padding:'4px 12px', borderRadius:100, display:'inline-block', marginBottom:16 }}>Most Popular</div>}
               <div style={{ fontFamily:'Syne', fontWeight:800, fontSize:18, color:'#f5f0e8', marginBottom:10 }}>{p.name}</div>
               <div style={{ fontFamily:'Syne', fontWeight:800, fontSize:36, color:'#f5a623', letterSpacing:-1.5 }}>
@@ -194,17 +236,17 @@ export function Pricing() {
                   </li>
                 ))}
               </ul>
-              <a href="#contact" style={{
-                display:'block', textAlign:'center', padding:13, borderRadius:100,
-                fontSize:14, fontWeight:600, textDecoration:'none', transition:'all 0.2s',
+              <button onClick={() => handleSelectPlan(p.name)} style={{
+                display:'block', width: '100%', textAlign:'center', padding:13, borderRadius:100,
+                fontSize:14, fontWeight:600, textDecoration:'none', transition:'all 0.2s', border: 'none', cursor: 'pointer',
                 ...(p.featured
                   ? { background:'#f5a623', color:'#0c1a12' }
-                  : { border:'1px solid rgba(245,240,232,0.2)', color:'#f5f0e8' })
+                  : { border:'1px solid rgba(245,240,232,0.2)', color:'#f5f0e8', background: 'transparent' })
               }}
                 onMouseEnter={e => { if(p.featured) { e.target.style.opacity=0.85 } else { e.target.style.borderColor='rgba(245,240,232,0.5)'; e.target.style.background='rgba(245,240,232,0.05)' } }}
                 onMouseLeave={e => { if(p.featured) { e.target.style.opacity=1 } else { e.target.style.borderColor='rgba(245,240,232,0.2)'; e.target.style.background='transparent' } }}>
                 {p.name === 'Enterprise' ? 'Contact Us' : 'Get Started'}
-              </a>
+              </button>
             </div>
           ))}
         </div>
@@ -214,7 +256,7 @@ export function Pricing() {
 }
 
 // ── CTA ───────────────────────────────────────────────────────────
-export function CTA() {
+export function CTA({ onGetStarted }) {
   const ref = useRef()
   useEffect(() => {
     if (!ref.current) return
@@ -234,9 +276,9 @@ export function CTA() {
         <p style={{ fontSize:'clamp(14px, 2.5vw, 16px)', color:'rgba(245,240,232,0.5)', marginBottom:32, lineHeight:1.75 }}>
           Join 8,200+ farms already using AgroSense to grow smarter, save water, and harvest more — season after season.
         </p>
-        <a href="#" className="btn-primary" style={{ fontSize:'clamp(13px, 2vw, 16px)', padding:'clamp(12px, 2vw, 16px) clamp(24px, 4vw, 36px)' }}>
+        <button onClick={onGetStarted} className="btn-primary" style={{ fontSize:'clamp(13px, 2vw, 16px)', padding:'clamp(12px, 2vw, 16px) clamp(24px, 4vw, 36px)', border: 'none', cursor: 'pointer', background: '#f5a623', color: '#0c1a12' }}>
           Start Free Trial — No Credit Card →
-        </a>
+        </button>
         <p style={{ fontSize:12, color:'rgba(245,240,232,0.28)', marginTop:16 }}>
           14-day free trial &nbsp;·&nbsp; Setup in under 30 minutes &nbsp;·&nbsp; Cancel anytime
         </p>

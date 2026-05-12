@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export default function Navbar() {
+export default function Navbar({ onGetStarted }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -43,7 +43,7 @@ export default function Navbar() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <a href="#" style={{ fontSize: 14, color: 'rgba(245,240,232,0.45)', textDecoration: 'none' }}
             className="nav-signin">Sign in</a>
-          <a href="#contact" className="btn-primary" style={{ padding: '9px 20px', fontSize: 13 }}>Get Started →</a>
+          <button onClick={onGetStarted} className="btn-primary" style={{ padding: '9px 20px', fontSize: 13, border: 'none', cursor: 'pointer', background: '#f5a623', color: '#0c1a12' }}>Get Started →</button>
           {/* Hamburger */}
           <button onClick={() => setMenuOpen(!menuOpen)}
             style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: 5, padding: 4 }}

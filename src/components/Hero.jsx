@@ -15,7 +15,7 @@ const SensorItem = ({ label, value, color, fill }) => (
   </div>
 )
 
-export default function Hero() {
+export default function Hero({ onGetStarted }) {
   const badgeRef = useRef()
   const headlineRef = useRef()
   const paraRef = useRef()
@@ -82,7 +82,7 @@ export default function Hero() {
 
           {/* Buttons */}
           <div ref={btnsRef} style={{ display: 'flex', gap: 14, marginBottom: 44, flexWrap: 'wrap' }}>
-            <a href="#contact" className="btn-primary">Start Free Trial →</a>
+            <button onClick={onGetStarted} className="btn-primary" style={{ border: 'none', cursor: 'pointer', background: '#f5a623', color: '#0c1a12' }}>Start Free Trial →</button>
             <a href="#features" className="btn-outline">▶ Watch Demo</a>
           </div>
 
