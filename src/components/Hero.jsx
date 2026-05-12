@@ -7,8 +7,8 @@ const SensorItem = ({ label, value, color, fill }) => (
     onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
     onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.04)'}
   >
-    <div style={{ fontSize: 11, color: 'rgba(245,240,232,0.4)', marginBottom: 6 }}>{label}</div>
-    <div style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: 22, color }}>{value}</div>
+    <div style={{ fontSize: 'clamp(9px, 1.5vw, 11px)', color: 'rgba(245,240,232,0.4)', marginBottom: 6 }}>{label}</div>
+    <div style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: 'clamp(18px, 3vw, 22px)', color }}>{value}</div>
     <div style={{ height: 3, background: 'rgba(255,255,255,0.07)', borderRadius: 100, overflow: 'hidden', marginTop: 7 }}>
       <div style={{ height: '100%', width: fill, background: color, borderRadius: 100 }} />
     </div>
@@ -53,12 +53,12 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="home" style={{ minHeight: '100vh', padding: '140px 64px 80px', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
+    <section id="home" style={{ minHeight: '100vh', padding: 'clamp(80px, 12vw, 140px) clamp(16px, 5vw, 64px)', marginTop: '0', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', paddingTop: 'clamp(80px, 15vh, 120px)' }}>
 
       <div style={{ position: 'absolute', top: -120, right: -120, width: 600, height: 600, background: 'radial-gradient(circle,rgba(74,124,89,0.18) 0%,transparent 70%)', borderRadius: '50%', pointerEvents: 'none' }} />
       <div style={{ position: 'absolute', bottom: -80, left: -80, width: 400, height: 400, background: 'radial-gradient(circle,rgba(245,166,35,0.08) 0%,transparent 70%)', borderRadius: '50%', pointerEvents: 'none' }} />
 
-      <div style={{ maxWidth: '100%', margin: '0 auto', width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center', position: 'relative' }}>
+      <div className="hero-grid" style={{ maxWidth: '100%', margin: '0 auto', width: '100%', display: 'grid', gap: 'clamp(32px, 5vw, 80px)', alignItems: 'center', position: 'relative' }}>
 
         {/* LEFT */}
         <div>
@@ -76,7 +76,7 @@ export default function Hero() {
           </h1>
 
           {/* Para */}
-          <p ref={paraRef} style={{ fontSize: 16, color: 'rgba(245,240,232,0.58)', lineHeight: 1.75, marginBottom: 32, maxWidth: 440 }}>
+          <p ref={paraRef} style={{ fontSize: 'clamp(14px, 2.5vw, 16px)', color: 'rgba(245,240,232,0.58)', lineHeight: 1.75, marginBottom: 32, maxWidth: 440 }}>
             Real-time soil, water & yield intelligence for agri-businesses and cooperatives managing farms at scale — all in one unified dashboard.
           </p>
 
@@ -94,15 +94,15 @@ export default function Hero() {
               { num: '4.9★',   lbl: 'average rating'   },
             ].map(s => (
               <div key={s.lbl} style={{ borderLeft: '2px solid #4a7c59', paddingLeft: 16 }}>
-                <div style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: 24, color: '#f5f0e8' }}>{s.num}</div>
-                <div style={{ fontSize: 12, color: 'rgba(245,240,232,0.4)', marginTop: 3 }}>{s.lbl}</div>
+                <div style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: 'clamp(18px, 3vw, 24px)', color: '#f5f0e8' }}>{s.num}</div>
+                <div style={{ fontSize: 'clamp(11px, 1.5vw, 12px)', color: 'rgba(245,240,232,0.4)', marginTop: 3 }}>{s.lbl}</div>
               </div>
             ))}
           </div>
         </div>
 
         {/* RIGHT */}
-        <div ref={rightRef} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div ref={rightRef} className="hero-right" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
 
           <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(245,166,35,0.22)', borderRadius: 18, padding: 20 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>

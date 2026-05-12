@@ -16,7 +16,7 @@ export default function Navbar() {
     <>
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        padding: scrolled ? '12px 48px' : '18px 48px',
+        padding: scrolled ? 'clamp(8px, 2vw, 12px) clamp(16px, 5vw, 48px)' : 'clamp(12px, 3vw, 18px) clamp(16px, 5vw, 48px)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         background: scrolled ? 'rgba(12,26,18,0.98)' : 'rgba(12,26,18,0.85)',
         borderBottom: '1px solid rgba(245,166,35,0.12)',
@@ -24,12 +24,12 @@ export default function Navbar() {
         transition: 'all 0.3s ease',
       }}>
         {/* Logo */}
-        <a href="#home" style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 22, color: '#f5f0e8', textDecoration: 'none', letterSpacing: -0.5 }}>
+        <a href="#home" style={{ fontFamily: 'Syne', fontWeight: 800, fontSize: 'clamp(16px, 4vw, 22px)', color: '#f5f0e8', textDecoration: 'none', letterSpacing: -0.5 }}>
           Agro<span style={{ color: '#f5a623' }}>Sense</span>
         </a>
 
         {/* Desktop links */}
-        <div style={{ display: 'flex', gap: 32 }} className="hidden md:flex">
+        <div style={{ display: 'flex', gap: 32 }} className="nav-desktop-links">
           {links.map(l => (
             <a key={l} href={`#${l.toLowerCase().replace(' ', '')}`}
               style={{ fontSize: 14, color: 'rgba(245,240,232,0.52)', textDecoration: 'none', transition: 'color 0.2s' }}
@@ -42,7 +42,7 @@ export default function Navbar() {
         {/* Right */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <a href="#" style={{ fontSize: 14, color: 'rgba(245,240,232,0.45)', textDecoration: 'none' }}
-            className="hidden md:block">Sign in</a>
+            className="nav-signin">Sign in</a>
           <a href="#contact" className="btn-primary" style={{ padding: '9px 20px', fontSize: 13 }}>Get Started →</a>
           {/* Hamburger */}
           <button onClick={() => setMenuOpen(!menuOpen)}

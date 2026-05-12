@@ -23,7 +23,7 @@ function useReveal(ref, from = { opacity: 0, y: 32 }) {
 export function Marquee() {
   const doubled = [...marqueeItems, ...marqueeItems]
   return (
-    <div style={{ padding:'20px 0', overflow:'hidden', borderTop:'1px solid rgba(245,240,232,0.06)', borderBottom:'1px solid rgba(245,240,232,0.06)', background:'rgba(255,255,255,0.015)' }}>
+    <div style={{ padding:'clamp(14px, 3vw, 20px) 0', overflow:'hidden', borderTop:'1px solid rgba(245,240,232,0.06)', borderBottom:'1px solid rgba(245,240,232,0.06)', background:'rgba(255,255,255,0.015)' }}>
       <div className="marquee-track">
         {doubled.map((item, i) => (
           <span key={i} style={{ fontSize:12, color:'rgba(245,240,232,0.28)', whiteSpace:'nowrap', letterSpacing:'2px', fontWeight:500, textTransform:'uppercase' }}>
@@ -40,12 +40,12 @@ export function Problem() {
   const ref = useRef()
   useReveal(ref)
   return (
-    <section ref={ref} id="whyus" style={{ padding:'100px 48px' }}>
+    <section ref={ref} id="whyus" style={{ padding:'clamp(60px, 10vw, 100px) clamp(16px, 5vw, 48px)' }}>
       <div style={{ maxWidth:1140, margin:'0 auto' }}>
         <span className="section-label reveal">The Problem</span>
         <h2 className="section-title reveal">Indian farming is flying blind.</h2>
         <p className="section-sub reveal" style={{ marginBottom:44 }}>Every year, agri-businesses lose crores — not from bad farming, but from decisions made without real data.</p>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:16 }}>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(clamp(250px, 100%, 280px),1fr))', gap:'clamp(12px, 2vw, 16px)' }}>
           {problems.map(p => (
             <div key={p.title} className="reveal" style={{
               background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.07)',
@@ -73,12 +73,12 @@ export function Features() {
   const ref = useRef()
   useReveal(ref)
   return (
-    <section ref={ref} id="features" style={{ padding:'100px 48px', background:'rgba(255,255,255,0.015)', borderTop:'1px solid rgba(255,255,255,0.05)', borderBottom:'1px solid rgba(255,255,255,0.05)' }}>
+    <section ref={ref} id="features" style={{ padding:'clamp(60px, 10vw, 100px) clamp(16px, 5vw, 48px)', background:'rgba(255,255,255,0.015)', borderTop:'1px solid rgba(255,255,255,0.05)', borderBottom:'1px solid rgba(255,255,255,0.05)' }}>
       <div style={{ maxWidth:1140, margin:'0 auto' }}>
         <span className="section-label reveal">Features</span>
         <h2 className="section-title reveal">Six modules. One dashboard.</h2>
         <p className="section-sub reveal" style={{ marginBottom:48 }}>Everything your agri-business needs to monitor, predict and act — in real time, from anywhere.</p>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))', gap:16 }}>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(clamp(260px, 100%, 300px),1fr))', gap:'clamp(12px, 2vw, 16px)' }}>
           {features.map(f => (
             <div key={f.name} className="reveal" style={{
               background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.07)',
@@ -109,17 +109,17 @@ export function Stats() {
     })
   }, [])
   return (
-    <div style={{ padding:'60px 48px' }}>
+    <div style={{ padding:'clamp(40px, 8vw, 60px) clamp(16px, 5vw, 48px)' }}>
       <div ref={ref} style={{
         maxWidth:1140, margin:'0 auto',
         background:'rgba(245,166,35,0.06)', border:'1px solid rgba(245,166,35,0.15)',
-        borderRadius:24, padding:'52px 40px',
-        display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))', gap:24,
+        borderRadius:24, padding:'clamp(32px, 6vw, 52px) clamp(24px, 5vw, 40px)',
+        display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))', gap:24,
       }}>
         {stats.map(s => (
           <div key={s.label} style={{ textAlign:'center' }}>
-            <div style={{ fontFamily:'Syne', fontWeight:800, fontSize:42, color:'#f5a623', letterSpacing:-2 }}>{s.num}</div>
-            <div style={{ fontSize:13, color:'rgba(245,240,232,0.42)', marginTop:6 }}>{s.label}</div>
+            <div style={{ fontFamily:'Syne', fontWeight:800, fontSize:'clamp(28px, 5vw, 42px)', color:'#f5a623', letterSpacing:-2 }}>{s.num}</div>
+            <div style={{ fontSize:'clamp(11px, 2vw, 13px)', color:'rgba(245,240,232,0.42)', marginTop:6 }}>{s.label}</div>
           </div>
         ))}
       </div>
@@ -132,11 +132,11 @@ export function Testimonials() {
   const ref = useRef()
   useReveal(ref)
   return (
-    <section ref={ref} id="stories" style={{ padding:'100px 48px' }}>
+    <section ref={ref} id="stories" style={{ padding:'clamp(60px, 10vw, 100px) clamp(16px, 5vw, 48px)' }}>
       <div style={{ maxWidth:1140, margin:'0 auto' }}>
         <span className="section-label reveal">Success Stories</span>
         <h2 className="section-title reveal">Trusted by the people<br />who feed India.</h2>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:18, marginTop:48 }}>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(clamp(250px, 100%, 280px),1fr))', gap:'clamp(14px, 2vw, 18px)', marginTop:'clamp(32px, 5vw, 48px)' }}>
           {testimonials.map(t => (
             <div key={t.name} className="reveal" style={{
               background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.07)',
@@ -166,12 +166,12 @@ export function Pricing() {
   const ref = useRef()
   useReveal(ref)
   return (
-    <section ref={ref} id="pricing" style={{ padding:'100px 48px', background:'rgba(255,255,255,0.015)', borderTop:'1px solid rgba(255,255,255,0.05)' }}>
+    <section ref={ref} id="pricing" style={{ padding:'clamp(60px, 10vw, 100px) clamp(16px, 5vw, 48px)', background:'rgba(255,255,255,0.015)', borderTop:'1px solid rgba(255,255,255,0.05)' }}>
       <div style={{ maxWidth:1140, margin:'0 auto' }}>
         <span className="section-label reveal">Pricing</span>
         <h2 className="section-title reveal">Simple. Honest. Scalable.</h2>
         <p className="section-sub reveal" style={{ marginBottom:48 }}>No hidden fees. No lock-in contracts. Cancel anytime.</p>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:18 }}>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(clamp(250px, 100%, 280px),1fr))', gap:'clamp(14px, 2vw, 18px)' }}>
           {plans.map(p => (
             <div key={p.name} className="reveal" style={{
               background: p.featured ? 'rgba(245,166,35,0.05)' : 'rgba(255,255,255,0.03)',
@@ -224,17 +224,17 @@ export function CTA() {
     })
   }, [])
   return (
-    <section id="contact" style={{ padding:'100px 48px', textAlign:'center', position:'relative', overflow:'hidden' }}>
+    <section id="contact" style={{ padding:'clamp(60px, 10vw, 100px) clamp(16px, 5vw, 48px)', textAlign:'center', position:'relative', overflow:'hidden' }}>
       <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:700, height:400, background:'radial-gradient(ellipse,rgba(74,124,89,0.18) 0%,transparent 70%)', pointerEvents:'none' }} />
       <div ref={ref} style={{ position:'relative', maxWidth:680, margin:'0 auto' }}>
-        <h2 style={{ fontFamily:'Syne', fontWeight:800, fontSize:'clamp(32px,5vw,52px)', color:'#f5f0e8', letterSpacing:-2, marginBottom:18, lineHeight:1.08 }}>
+        <h2 style={{ fontFamily:'Syne', fontWeight:800, fontSize:'clamp(28px, 6vw, 52px)', color:'#f5f0e8', letterSpacing:-2, marginBottom:18, lineHeight:1.08 }}>
           Your fields are talking.<br />
           Are you <em style={{ fontStyle:'normal', color:'#f5a623' }}>listening?</em>
         </h2>
-        <p style={{ fontSize:16, color:'rgba(245,240,232,0.5)', marginBottom:32, lineHeight:1.75 }}>
+        <p style={{ fontSize:'clamp(14px, 2.5vw, 16px)', color:'rgba(245,240,232,0.5)', marginBottom:32, lineHeight:1.75 }}>
           Join 8,200+ farms already using AgroSense to grow smarter, save water, and harvest more — season after season.
         </p>
-        <a href="#" className="btn-primary" style={{ fontSize:16, padding:'16px 36px' }}>
+        <a href="#" className="btn-primary" style={{ fontSize:'clamp(13px, 2vw, 16px)', padding:'clamp(12px, 2vw, 16px) clamp(24px, 4vw, 36px)' }}>
           Start Free Trial — No Credit Card →
         </a>
         <p style={{ fontSize:12, color:'rgba(245,240,232,0.28)', marginTop:16 }}>
@@ -248,18 +248,18 @@ export function CTA() {
 // ── FOOTER ────────────────────────────────────────────────────────
 export function Footer() {
   return (
-    <footer style={{ padding:'32px 48px', borderTop:'1px solid rgba(245,240,232,0.07)', display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:16 }}>
-      <div style={{ fontFamily:'Syne', fontWeight:800, fontSize:18, color:'#f5f0e8' }}>
+    <footer style={{ padding:'clamp(24px, 5vw, 32px) clamp(16px, 5vw, 48px)', borderTop:'1px solid rgba(245,240,232,0.07)', display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:16, flexDirection:'column', gap:'24px' }}>
+      <div style={{ fontFamily:'Syne', fontWeight:800, fontSize:'clamp(14px, 4vw, 18px)', color:'#f5f0e8' }}>
         Agro<span style={{ color:'#f5a623' }}>Sense</span>
       </div>
-      <div style={{ display:'flex', gap:24, flexWrap:'wrap' }}>
+      <div style={{ display:'flex', gap:'clamp(16px, 3vw, 24px)', flexWrap:'wrap', justifyContent:'center' }}>
         {['Privacy Policy','Terms of Use','Contact','Documentation'].map(l => (
-          <a key={l} href="#" style={{ fontSize:13, color:'rgba(245,240,232,0.32)', textDecoration:'none', transition:'color 0.2s' }}
+          <a key={l} href="#" style={{ fontSize:'clamp(11px, 2vw, 13px)', color:'rgba(245,240,232,0.32)', textDecoration:'none', transition:'color 0.2s' }}
             onMouseEnter={e => e.target.style.color='rgba(245,240,232,0.7)'}
             onMouseLeave={e => e.target.style.color='rgba(245,240,232,0.32)'}>{l}</a>
         ))}
       </div>
-      <div style={{ fontSize:12, color:'rgba(245,240,232,0.22)' }}>© 2026 AgroSense · Built for Indian agri-businesses</div>
+      <div style={{ fontSize:'clamp(10px, 2vw, 12px)', color:'rgba(245,240,232,0.22)', textAlign:'center' }}>© 2026 AgroSense · Built for Indian agri-businesses</div>
     </footer>
   )
 }
